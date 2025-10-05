@@ -1,0 +1,52 @@
+:root {
+    --arena-dimensions: calc(min(80vh, 80vw));
+    --num-grid-squares: 10;
+    --positive-color: rgba(255, 255, 255, 0);
+    --negative-color: rgba(255, 255, 255, 0);
+    --arena-top: calc(50% - (var(--arena-dimensions) / 2));
+    --arena-left: calc(50% - (var(--arena-dimensions) /2));
+    --ball-radius: 0;
+    --background-angle: -45deg;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.grid-background {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(var(--background-angle), var(--positive-color), var(--negative-color));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-container {
+    display: grid;
+    width: var(--arena-dimensions);
+    height: var(--arena-dimensions);
+    grid-template-columns: repeat(var(--num-grid-squares), 1fr);
+    grid-template-rows: repeat(var(--num-grid-squares), 1fr);
+}
+
+.grid-square {
+    width: 100%;
+    height: 100%;
+}
+
+.ball {
+    --pos-x: 0;
+    --pos-y: 0;
+    --ball-color: rgba(255, 255, 255, 0);
+    width: calc(var(--arena-dimensions) / var(--num-grid-squares) * 2 * var(--ball-radius));
+    height: calc(var(--arena-dimensions) / var(--num-grid-squares) * 2 * var(--ball-radius));
+    background-color: var(--ball-color);
+    border-radius: 50%;
+    position: fixed;
+    top: calc(var(--arena-top) + ((var(--pos-y) - var(--ball-radius)) / var(--num-grid-squares) * var(--arena-dimensions)));
+    left: calc(var(--arena-left) + ((var(--pos-x) - var(--ball-radius)) / var(--num-grid-squares) * var(--arena-dimensions)));
+}
